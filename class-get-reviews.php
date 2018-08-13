@@ -138,18 +138,21 @@ class get_reviews {
 		foreach ($this->fb_reviews as $graphNode) {
 
 			if(isset($graphNode['review_text'])) { $rev_txt = $graphNode['review_text']; }else{ $rev_txt =''; };
+			
 			 
 			 $this->allFBreviews[] =  array(
 			 							'name'=>$graphNode['reviewer']['name'],
 			 							'id'=>'fb-'.$graphNode['reviewer']['id'],
 			 							'rating'=>$graphNode['rating'],
-			 							'review_text'=> $rev_txt
+			 							'review_text'=> $rev_txt,
+			 							'profile_photo_URI'=> '//graph.facebook.com/'.$graphNode['reviewer']['id'].'/picture'
 			 						 );
 			 $this->getAllReviews[] =  array(
 			 							'name'=>$graphNode['reviewer']['name'],
 			 							'id'=>'fb-'.$graphNode['reviewer']['id'],
 			 							'rating'=>$graphNode['rating'],
-			 							'review_text'=> $rev_txt
+			 							'review_text'=> $rev_txt,
+			 							'profile_photo_URI'=> '//graph.facebook.com/'.$graphNode['reviewer']['id'].'/picture'
 			 						 );		
 			
 		 
@@ -157,6 +160,8 @@ class get_reviews {
 		
 		
 	}
+
+	
 
 	public function getAllFbReviews(){
 
@@ -263,6 +268,7 @@ class get_reviews {
 
 	private function array_to_xml($array, $xml_user_info) {
 	    foreach($array as $key => $value) {
+	    	
 	        if(is_array($value)) {
 	            if(!is_numeric($key)){
 	                $subnode = $xml_user_info->addChild("$key");
@@ -271,7 +277,8 @@ class get_reviews {
 	                $subnode = $xml_user_info->addChild("item$key");
 	                $this->array_to_xml($value, $subnode);
 	            }
-	        }else {
+	        }	        
+	        else {
 	            $xml_user_info->addChild("$key",htmlspecialchars("$value"));
 	        }
 	    }

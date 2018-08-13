@@ -29,12 +29,12 @@ $reviews->setAutoloadLink(__DIR__ .'/Facebook/autoload.php');
 */
 $reviews->setFacebookAccess(
 	true, // enable facebook reviews
-	'879436418898130', //app id
-	'aff92d87c192cb5e4654d6cd6b6419f3', //app secret
-	'320024731367272', //page id
+	'', //app id
+	'', //app secret
+	'', //page id
 	'v2.10', // api version,	
 	'', // page access token  ,
-	'EAAMf179ZA2NIBAOpRFt5cDUGcZBknN6ZAlAj4ymLoLZBOyzgnX9y6ntYXer1BmS64zJoTCf5UecbDWMalI4TjwbvcI1MIHnxniSY51lgRlOfDwtHYdllwaXST8tmYGpf23Xkh2ZCQnfbB36QGjLZC0orZBYlwAj4PloZCCaFOpEYbgZDZDD' // profile Access token
+	'' // profile Access token
 );
 
 /* To get all Facebook Reviews
@@ -56,7 +56,7 @@ echo '</pre>';
 *  =====================================================================
 */ 
 
-$reviews->setGoogle( true, 'ChIJN1t_tDeuEmsRUsoyG83frY4', 'AIzaSyAKsvxYoF869llZmLQ0DfYzRkPBAmwcaTo' );
+$reviews->setGoogle( true, '', '' );
 
 /* To get all Google Reviews
 *  ======================================================================
