@@ -31,6 +31,11 @@ class get_reviews {
 	var $getAllReviews = array();
 
 
+	function __construct() {
+		date_default_timezone_set("Europe/Rome");		
+	}
+
+
 
 	/*
 	* =========================
