@@ -145,14 +145,14 @@ class get_reviews {
 			 							'id'=>'fb-'.$graphNode['reviewer']['id'],
 			 							'rating'=>$graphNode['rating'],
 			 							'review_text'=> $rev_txt,
-			 							'profile_photo_URI'=> '//graph.facebook.com/'.$graphNode['reviewer']['id'].'/picture'
+			 							'imgprofilebase64'=> $this->makeBase64('http://graph.facebook.com/'.$graphNode['reviewer']['id'].'/picture')
 			 						 );
 			 $this->getAllReviews[] =  array(
 			 							'name'=>$graphNode['reviewer']['name'],
 			 							'id'=>'fb-'.$graphNode['reviewer']['id'],
 			 							'rating'=>$graphNode['rating'],
 			 							'review_text'=> $rev_txt,
-			 							'profile_photo_URI'=> '//graph.facebook.com/'.$graphNode['reviewer']['id'].'/picture'
+			 							'imgprofilebase64'=> $this->makeBase64('http://graph.facebook.com/'.$graphNode['reviewer']['id'].'/picture')
 			 						 );		
 			
 		 
@@ -203,18 +203,25 @@ class get_reviews {
 				 							'auth_URI'=>$result['author_url'],
 				 							'rating'=>$result['rating'],
 				 							'review_text'=> $result['text'],
-				 							'profile_photo_URI'=> $result['profile_photo_url']
+				 							'imgprofilebase64'=> $this->makeBase64($result['profile_photo_url'])
 				 						 );	
 				$this->getAllReviews[] =  array(
 				 							'name'=>$result['author_name'],
 				 							'auth_URI'=>$result['author_url'],
 				 							'rating'=>$result['rating'],
 				 							'review_text'=> $result['text'],
-				 							'profile_photo_URI'=> $result['profile_photo_url']
+				 							'imgprofilebase64'=> $this->makeBase64($result['profile_photo_url'])
 				 						 );	 
 			}			
 		 
 		}
+	}
+
+	private function makeBase64($url){
+		$data = file_get_contents($url);
+		$type = pathinfo($url, PATHINFO_EXTENSION);
+		$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+		return $base64;
 	}
 
 	public function getAllGOOGLEReviews(){
