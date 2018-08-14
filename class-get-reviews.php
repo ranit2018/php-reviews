@@ -29,6 +29,7 @@ class get_reviews {
 	var $allFBreviews = array();
 	var $allGOOGLEreviews = array();
 	var $getAllReviews = array();
+	var $shuffleEnable = false;
 
 
 	function __construct() {
@@ -247,13 +248,22 @@ class get_reviews {
 
 	public function showAllReviews(){
 
-		$this->getAllReviews = array('Total_reviews'=> count($this->getAllReviews))+$this->getAllReviews; 
+		 
 
 		//$this->getAllReviews['Total_reviews'] = count($this->getAllReviews) ;
 
 		if($this->getAllReviews){
+
+			if($this->shuffleEnable){
+
+				shuffle($this->getAllReviews);	
+							
+			}		
+
+			$this->getAllReviews = array('Total_reviews'=> count($this->getAllReviews))+$this->getAllReviews;	
+
+			return $this->getAllReviews;			
 			
-			return $this->getAllReviews;
 		}
 		else{
 			return 'No reviews!';
@@ -268,13 +278,15 @@ class get_reviews {
 	*/ 
 	
 
-	public function creatXML($fileName){
+	public function creatXML($fileName){	
 
+		
 		//creating object of SimpleXMLElement
 		$xml_user_info = new SimpleXMLElement("<?xml version=\"1.0\"?><user_reviews></user_reviews>");
+		$this->array_to_xml($this->getAllReviews,$xml_user_info);
 
 		//function call to convert array to xml
-		$this->array_to_xml($this->getAllReviews,$xml_user_info);
+		
 		$xml_file = $xml_user_info->asXML($fileName.'.xml');
 	}	
 
@@ -295,4 +307,23 @@ class get_reviews {
 	        }
 	    }
 	} 
+
+	/*
+	* ===================
+	* Enable or disable shuffle
+	* ====================
+	*/
+
+
+	public function shuffle($s){
+		if($s){
+			$this->shuffleEnable = true;
+		}else{
+			$this->shuffleEnable = false;
+		}		 
+
+	}	
+
+
+
 } 

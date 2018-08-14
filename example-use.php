@@ -3,6 +3,16 @@ require_once('class-get-reviews.php');
 
 $reviews = new get_reviews();
 
+
+/* Enable or Disable shuffle
+*  ======================================================================
+*  $reviews->shuffle(false);
+*  =====================================================================
+*/ 
+
+$reviews->shuffle(true);
+
+
 /* SET autoload file for facebook client
 *  ======================================================================
 *  $reviews->setAutoloadLink('Path of the autoload.php file');
