@@ -32,8 +32,30 @@ class get_reviews {
 	var $shuffleEnable = false;
 
 
-	function __construct() {
-		date_default_timezone_set("Europe/Rome");		
+	function __construct($config) {
+		
+		date_default_timezone_set($config['default_timezone']);	
+		
+		// Facebook config
+		if($config['fb_enable']) {
+			$this->setFacebookAccess(	$config['fb_enable'],
+										$config['fb_app_id'],
+										$config['fb_app_secret'],
+										$config['fb_page_id'],
+										$config['fb_api_version'],
+										$config['fb_page_accesstoken'],
+										$config['fb_profile_accesstoken']
+									);
+		}
+		// Google config
+		if($config['google_enable']) {
+			$this->setGoogle(	$config['google_enable'],
+								$config['google_placeid'],
+								$config['google_apikey']
+							);
+		}	
+		// Shuffle
+		$this->shuffle($config['review_shuffle']);
 	}
 
 

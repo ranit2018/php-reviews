@@ -1,51 +1,21 @@
 <?php
-require_once('class-get-reviews.php');
+require_once(__DIR__ .'/class-get-reviews.php');
+require_once(__DIR__ .'/Facebook/autoload.php');
 
-$reviews = new get_reviews();
-
-
-/* Enable or Disable shuffle
-*  ======================================================================
-*  $reviews->shuffle(false);
-*  =====================================================================
-*/ 
-
-$reviews->shuffle(true);
+if(($config = include(__DIR__."/config.php")) === false) {
+	print "Configuration file missing";
+	exit;
+}
 
 
-/* SET autoload file for facebook client
-*  ======================================================================
-*  $reviews->setAutoloadLink('Path of the autoload.php file');
-*  =====================================================================
-*/ 
 
-$reviews->setAutoloadLink(__DIR__ .'/Facebook/autoload.php');
+$reviews = new get_reviews($config);
 
 
-/* 
-*	Need to set the credentials for facebook
-*	============================================================================================================================
-*	$reviews->setFacebookAccess( 
-*			enable/disable reviews, 
-*			'app id', 
-*			'app secret', 
-*			'page id', 
-*			'api version', 
-*			'page access token ', 
-*			'profile access token'); 
-*	============================================================================================================================
-* 	Note:: If you dont have page access token, leave the parameter blank. And put Your profile Access token. If you are adding both,
-* 	the Profile token will be 	ignored!
-*/
-$reviews->setFacebookAccess(
-	true, // enable facebook reviews
-	'', //app id
-	'', //app secret
-	'', //page id
-	'v2.10', // api version,	
-	'', // page access token  ,
-	'' // profile Access token
-);
+
+
+
+
 
 /* To get all Facebook Reviews
 *  ======================================================================
@@ -57,16 +27,6 @@ echo '<pre>';
 echo '</pre>';
 
 
-/* SET google credentials
-*  ======================================================================
-*  $reviews->setGoogle( 
-*			enable/disable reviews, 
-*			'PLACE ID', 
-*			'API KEY' );
-*  =====================================================================
-*/ 
-
-$reviews->setGoogle( true, '', '' );
 
 /* To get all Google Reviews
 *  ======================================================================
